@@ -1,4 +1,3 @@
-# BaiTap-LapTrinh-Android
 # BÀI TẬP LẬP TRÌNH ANDROID
 **Họ và tên:** Ngô Phi Bin
 **MSSV:** 24AI006
