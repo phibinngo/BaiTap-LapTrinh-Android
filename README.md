@@ -15,3 +15,5 @@
 ### Lab 2: Business card
 ### Lab 3: Dice roller app
 ### Lab 4: Tip time app
+### Lab 5: Woof app
+
