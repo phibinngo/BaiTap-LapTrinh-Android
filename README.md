@@ -16,4 +16,7 @@
 ### Lab 3: Dice roller app
 ### Lab 4: Tip time app
 ### Lab 5: Woof app
+### Lab 6: Navigation
+- Bài 1: MultiScreen App
+- Bài 2: Cupcakes App
 
