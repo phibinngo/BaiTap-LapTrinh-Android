@@ -10,7 +10,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.firebaseproject"
+        applicationId = "com.example.lab7"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
