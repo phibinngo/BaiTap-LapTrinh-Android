@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.Lab7"
+    namespace = "com.example.firebaseproject"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.lab7"
+        applicationId = "com.example.firebaseproject"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
