@@ -119,59 +119,160 @@ fun ProductListScreen(
     }
 }
 
+//@Composable
+//fun ProductItemCard(product: Product, onEditClick: () -> Unit, onDeleteClick: () -> Unit) {
+//    OutlinedCard(
+//        modifier = Modifier.fillMaxWidth(),
+//        shape = RoundedCornerShape(8.dp),
+//        colors = CardDefaults.outlinedCardColors(containerColor = Color.White),
+//        border = BorderStroke(1.dp, Color(0xFF64B5F6))
+//    ) {
+//        Row(
+//            modifier = Modifier.padding(12.dp).fillMaxWidth(),
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
+//            AsyncImage(
+//                model = ImageRequest.Builder(LocalContext.current)
+//                    .data(product.imageUrl)
+//                    .crossfade(true)
+//                    .build(),
+//                contentDescription = product.name,
+//                modifier = Modifier.size(width = 100.dp, height = 70.dp),
+//                contentScale = ContentScale.Crop
+//            )
+//
+//            Spacer(modifier = Modifier.width(12.dp))
+//
+//            Column(modifier = Modifier.weight(1f)) {
+//                ProductTextInfo(label = "Tên sp", value = product.name)
+//                // Ép kiểu hiển thị giá về chuỗi
+//                ProductTextInfo(label = "Giá sp", value = product.price.toString())
+//                ProductTextInfo(label = "Loại sp", value = product.category)
+//            }
+//
+//            Column(
+//                horizontalAlignment = Alignment.CenterHorizontally,
+//                verticalArrangement = Arrangement.spacedBy(8.dp)
+//            ) {
+//                OutlinedIconButton(
+//                    onClick = onEditClick,
+//                    modifier = Modifier.size(36.dp),
+//                    shape = RoundedCornerShape(8.dp),
+//                    colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Color(0xFFFFB300)),
+//                    border = BorderStroke(1.dp, Color(0xFFFFB300))
+//                ) {
+//                    Icon(imageVector = Icons.Default.Edit, contentDescription = "Sửa", modifier = Modifier.size(20.dp))
+//                }
+//
+//                OutlinedIconButton(
+//                    onClick = onDeleteClick,
+//                    modifier = Modifier.size(36.dp),
+//                    shape = RoundedCornerShape(8.dp),
+//                    colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Color(0xFFE53935)),
+//                    border = BorderStroke(1.dp, Color(0xFFE53935))
+//                ) {
+//                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Xóa", modifier = Modifier.size(20.dp))
+//                }
+//            }
+//        }
+//    }
+//}
 @Composable
 fun ProductItemCard(product: Product, onEditClick: () -> Unit, onDeleteClick: () -> Unit) {
-    OutlinedCard(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.outlinedCardColors(containerColor = Color.White),
-        border = BorderStroke(1.dp, Color(0xFF64B5F6))
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp), // Thêm chút khoảng cách 2 bên
+        shape = RoundedCornerShape(16.dp), // Bo góc tròn hơn nhìn sẽ hiện đại hơn
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp) // Thêm đổ bóng nhẹ cho sang
     ) {
         Row(
-            modifier = Modifier.padding(12.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(12.dp)
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(product.imageUrl)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = product.name,
-                modifier = Modifier.size(width = 100.dp, height = 70.dp),
-                contentScale = ContentScale.Crop
-            )
-
-            Spacer(modifier = Modifier.width(12.dp))
-
-            Column(modifier = Modifier.weight(1f)) {
-                ProductTextInfo(label = "Tên sp", value = product.name)
-                // Ép kiểu hiển thị giá về chuỗi
-                ProductTextInfo(label = "Giá sp", value = product.price.toString())
-                ProductTextInfo(label = "Loại sp", value = product.category)
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+                color = Color(0xFFF5F5F5)
+            ) {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(product.imageUrl)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = product.name,
+                    modifier = Modifier.size(80.dp),
+                    contentScale = ContentScale.Crop
+                )
             }
 
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                OutlinedIconButton(
-                    onClick = onEditClick,
-                    modifier = Modifier.size(36.dp),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Color(0xFFFFB300)),
-                    border = BorderStroke(1.dp, Color(0xFFFFB300))
+            Spacer(modifier = Modifier.width(16.dp))
+
+            // --- THÔNG TIN SẢN PHẨM ---
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = product.name,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    color = Color(0xFF1A1A1A)
+                )
+                Text(
+                    text = "${product.price.toLong()} VNĐ",
+                    color = Color(0xFF1976D2),
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 14.sp
+                )
+                Surface(
+                    color = Color(0xFFE3F2FD),
+                    shape = RoundedCornerShape(4.dp),
+                    modifier = Modifier.padding(top = 4.dp)
                 ) {
-                    Icon(imageVector = Icons.Default.Edit, contentDescription = "Sửa", modifier = Modifier.size(20.dp))
+                    Text(
+                        text = product.category,
+                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                        fontSize = 11.sp,
+                        color = Color(0xFF1976D2)
+                    )
+                }
+            }
+
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+
+                IconButton(
+                    onClick = onEditClick,
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color(0xFFFFF8E1),
+                        contentColor = Color(0xFFFFB300)
+                    ),
+                    modifier = Modifier.size(40.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Sửa",
+                        modifier = Modifier.size(20.dp)
+                    )
                 }
 
-                OutlinedIconButton(
+                // Nút Xóa - Màu Đỏ (Tonal)
+                IconButton(
                     onClick = onDeleteClick,
-                    modifier = Modifier.size(36.dp),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Color(0xFFE53935)),
-                    border = BorderStroke(1.dp, Color(0xFFE53935))
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color(0xFFFFEBEE),
+                        contentColor = Color(0xFFE53935)
+                    ),
+                    modifier = Modifier.size(40.dp)
                 ) {
-                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Xóa", modifier = Modifier.size(20.dp))
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Xóa",
+                        modifier = Modifier.size(20.dp)
+                    )
                 }
             }
         }

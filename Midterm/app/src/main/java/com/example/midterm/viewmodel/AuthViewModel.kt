@@ -8,8 +8,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class AuthViewModel : ViewModel() {
 
-    private val auth = FirebaseAuth.getInstance()
-    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance() // biến xac thuc
+    private val db = FirebaseFirestore.getInstance() // bien luu tru
     var notice = mutableStateOf("")
     var isRegisterSuccess = mutableStateOf(false)
     var role = mutableStateOf("")
@@ -20,16 +20,16 @@ class AuthViewModel : ViewModel() {
             return
         }
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
+        auth.createUserWithEmailAndPassword(email, password) // hàm của firebase để tạo tk
+            .addOnCompleteListener { task -> // nếu gui len server thì làm task tiep theo
+                if (task.isSuccessful) { // kiem tra dk dc khong
                     val user = auth.currentUser
                     user?.sendEmailVerification()?.addOnCompleteListener { verifyTask ->
                         if (verifyTask.isSuccessful) {
 
-                            val userData = hashMapOf("email" to email, "role" to "user")
+                            val userData = hashMapOf("email" to email, "role" to "user") // gan gia tri o day vao model -> dong goi data
 
-                            db.collection("users").document(user.uid).set(userData)
+                            db.collection("users").document(user.uid).set(userData) // set data tren firebase
                                 .addOnSuccessListener {
                                     // Lưu lên bảng users thành công thì mới bắt đầu đoạn này ( nhờ addOnSuccessListener)
                                     notice.value = "Đăng ký xong! Vui lòng xác nhận tại gmail."
@@ -56,10 +56,10 @@ class AuthViewModel : ViewModel() {
             return
         }
 
-        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task -> // xem yeu cau danh nhap dc complechua, nesu ròi thi làm ták
             if (task.isSuccessful) {
-                // Đăng nhập thành công, bắt đầu ép Firebase tải lại dữ liệu mới nhất
-                auth.currentUser?.reload()?.addOnCompleteListener { reloadTask ->
+                // Đăng nhập thành công
+                auth.currentUser?.reload()?.addOnCompleteListener { reloadTask -> //auth.currentUser? đe lay thong tin khach hien tai
                     if (reloadTask.isSuccessful) {
                         // Tải lại xong, check lại xem đã bấm link verify thật chưa
                         if (auth.currentUser?.isEmailVerified == true) {
@@ -87,7 +87,7 @@ class AuthViewModel : ViewModel() {
     }
 
     fun loginWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        val credential = GoogleAuthProvider.getCredential(idToken, null) // tao chung chi từ idtoken của tk gg trong máy
         auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val user = auth.currentUser

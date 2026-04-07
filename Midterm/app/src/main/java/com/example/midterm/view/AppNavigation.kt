@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 
-// Import các màn hình từ đúng thư mục
+// Import các màn hình từ thư mục
 import com.example.midterm.view.auth.LoginScreen
 import com.example.midterm.view.auth.RegisterScreen
 import com.example.midterm.view.admin.products.ProductListScreen
@@ -20,15 +20,15 @@ import com.example.midterm.viewmodel.ProductViewModel
 
 @Composable
 fun AppNavigation(authViewModel: AuthViewModel) {
-    val navController = rememberNavController()
-    // Khởi tạo cỗ máy xử lý dữ liệu Sản phẩm
+    val navController = rememberNavController() // remember để nhớ lịch sử các trang đã qua
+    // Khởi tạo bộ điều khiển
     val productViewModel: ProductViewModel = viewModel()
 
     NavHost(navController = navController, startDestination = "login") {
 
         // 1. Màn hình Đăng nhập
         composable("login") {
-            LoginScreen(navController, authViewModel)
+            LoginScreen(navController, authViewModel)// gắn các tham số sẽ đc truyền vào bên loginscreen
         }
 
         // 2. Màn hình Đăng ký
@@ -38,31 +38,26 @@ fun AppNavigation(authViewModel: AuthViewModel) {
 
         // 3. Màn hình User
         composable("user_home") {
-            UserScreen(navController = navController, authViewModel = authViewModel)
+            UserScreen(navController, authViewModel)
         }
 
         // 4. Màn hình Admin (Danh sách)
         composable("admin_home") {
-            // Nhớ truyền cả 2 ViewModel vào đây nhé ní
-            ProductListScreen(
-                navController = navController,
-                viewModel = productViewModel,
-                authViewModel = authViewModel
-            )
+            ProductListScreen(navController, productViewModel, authViewModel)
         }
 
         // 5. Màn hình Thêm sản phẩm
         composable("add_product") {
-            AddProductScreen(navController = navController, viewModel = productViewModel)
+            AddProductScreen(navController, productViewModel)
         }
 
-        // 6. Màn hình Cập nhật sản phẩm (Nhận ID từ URL để biết đang sửa thằng nào)
+        // 6. Màn hình Cập nhật sản phẩm
         composable(
             route = "update_product/{productId}",
-            arguments = listOf(navArgument("productId") { type = NavType.StringType })
+            arguments = listOf(navArgument("productId") { type = NavType.StringType }) //argument để chứa các du lieu se dem theo : productid
         ) { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: ""
-            UpdateProductScreen(navController = navController, viewModel = productViewModel, productId = productId)
+            UpdateProductScreen(navController,productViewModel,productId)
         }
     }
 }

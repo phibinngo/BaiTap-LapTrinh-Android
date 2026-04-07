@@ -18,7 +18,6 @@ import com.example.midterm.viewmodel.ProductViewModel
 fun UpdateProductScreen(navController: NavController, viewModel: ProductViewModel, productId: String) {
     val product = viewModel.productList.find { it.id == productId }
 
-    // Chuyển Double từ Model sang String để hiện lên TextField
     var name by remember { mutableStateOf(product?.name ?: "") }
     var price by remember { mutableStateOf(product?.price?.toString() ?: "") }
     var category by remember { mutableStateOf(product?.category ?: "") }

@@ -23,7 +23,7 @@ class ProductViewModel : ViewModel() {
             .addOnSuccessListener { documents ->
                 productList.clear()
                 for (document in documents) {
-                    val product = document.toObject(Product::class.java)
+                    val product = document.toObject(Product::class.java) // gan ep du lieu tren db vua dem xuong vao model tạo obj moi
                     productList.add(product)
                 }
                 isLoading.value = false
@@ -41,7 +41,6 @@ class ProductViewModel : ViewModel() {
             return
         }
 
-        // Chuyển String sang Double
         val priceDouble = priceStr.toDoubleOrNull()
         if (priceDouble == null) {
             notice.value = "Giá phải là số !"
@@ -50,12 +49,11 @@ class ProductViewModel : ViewModel() {
         isLoading.value = true
         val productId = UUID.randomUUID().toString()
 
-        // CHỖ NÀY QUAN TRỌNG: Phải dùng priceDouble (đã ép kiểu Double)
         val product = Product(
             id = productId,
             name = name,
             category = category,
-            price = priceDouble, // KHÔNG ĐƯỢC dùng priceStr ở đây
+            price = priceDouble,
             imageUrl = imageUrl
         )
 
@@ -81,7 +79,6 @@ class ProductViewModel : ViewModel() {
 
         isLoading.value = true
 
-        // Tương tự, dùng priceDouble ở đây
         val updatedProduct = Product(
             id = productId,
             name = name,
