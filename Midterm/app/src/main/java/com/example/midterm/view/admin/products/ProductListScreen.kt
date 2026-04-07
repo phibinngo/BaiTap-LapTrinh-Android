@@ -244,11 +244,12 @@ fun ProductItemCard(product: Product, onEditClick: () -> Unit, onDeleteClick: ()
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
 
+
                 IconButton(
                     onClick = onEditClick,
                     colors = IconButtonDefaults.iconButtonColors(
-                        containerColor = Color(0xFFFFF8E1),
-                        contentColor = Color(0xFFFFB300)
+                        containerColor = Color(0xFFE8EAF6), // Màu xanh Indigo rất nhạt
+                        contentColor = Color(0xFF3F51B5)    // Màu xanh Indigo đậm
                     ),
                     modifier = Modifier.size(40.dp)
                 ) {
@@ -259,12 +260,12 @@ fun ProductItemCard(product: Product, onEditClick: () -> Unit, onDeleteClick: ()
                     )
                 }
 
-                // Nút Xóa - Màu Đỏ (Tonal)
+
                 IconButton(
                     onClick = onDeleteClick,
                     colors = IconButtonDefaults.iconButtonColors(
-                        containerColor = Color(0xFFFFEBEE),
-                        contentColor = Color(0xFFE53935)
+                        containerColor = Color(0xFFFFEBEE), // Màu hồng nhạt
+                        contentColor = Color(0xFFC62828)    // Màu đỏ đô đậm
                     ),
                     modifier = Modifier.size(40.dp)
                 ) {

@@ -56,7 +56,6 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
         }
     }
 
-    // --- LẮNG NGHE QUYỀN ĐỂ NHẢY TRANG ---
     LaunchedEffect(role) {
         if (role == "admin") {
             navController.navigate("admin_home") { popUpTo("login") { inclusive = true } }

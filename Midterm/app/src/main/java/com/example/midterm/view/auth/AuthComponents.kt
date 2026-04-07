@@ -69,18 +69,18 @@ fun AuthTextField(
     )
 }
 
-// 2. Nút bấm dùng chung (Nút Đăng nhập, Nút Đăng ký)
+
 @Composable
 fun AuthButton(
     text: String,
     onClick: () -> Unit,
-    containerColor: Color = MaterialTheme.colorScheme.primary
+    containerColor: Color = Color(0xFF2E7D32)
 ) {
     Button(
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp), // Nút cao 50dp bấm cho sướng tay
+            .height(50.dp),
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(containerColor = containerColor)
     ) {
