@@ -20,4 +20,8 @@
 - Bài 1: MultiScreen App
 - Bài 2: Cupcakes App
 ### Lab 7: CRUD cơ bản
+### Lab 8: Thực hành login register 
+### Lab 9: CBlur-O-Matic app
+### Lab 10: CRUD cơ bản với Room
+  
 
